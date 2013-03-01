@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- This is an auto generated file and is not intended for modification. -->
+
+<s:Application xmlns:fx="http://ns.adobe.com/mxml/2009"
+			   xmlns:s="library://ns.adobe.com/flex/spark"
+			   xmlns:mx="library://ns.adobe.com/flex/mx"
+			   xmlns:flexui="flexunit.flexui.*"
+			   minWidth="955" minHeight="600" creationComplete="onCreationComplete()">
+	<fx:Script>
+		<![CDATA[
+			import should.tests.Exist_testCase;
+			import should.tests.Should_assertFunctions_testCase;
+			import should.tests.Should_connectors_testrCase;
+			import should.tests.Should_general_testCase;
+			import should.tests.Should_suite;
+			import should.tests.Should_typeCheckers_testCase;
+			
+			public function currentRunTestSuite():Array
+			{
+				var testsToRun:Array = new Array();
+				testsToRun.push(should.tests.Exist_testCase);
+				testsToRun.push(should.tests.Should_assertFunctions_testCase);
+				testsToRun.push(should.tests.Should_connectors_testrCase);
+				testsToRun.push(should.tests.Should_general_testCase);
+				testsToRun.push(should.tests.Should_typeCheckers_testCase);
+				testsToRun.push(should.tests.Should_suite);
+				return testsToRun;
+			}
+			
+			
+			private function onCreationComplete():void
+			{
+				testRunner.runWithFlexUnit4Runner(currentRunTestSuite(), "shouldTest");
+			}
+			
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<!-- Place non-visual elements (e.g., services, value objects) here -->
+	</fx:Declarations>
+	<flexui:FlexUnitTestRunnerUI id="testRunner" portNumber="8765">
+	</flexui:FlexUnitTestRunnerUI>
+</s:Application>
