@@ -7,23 +7,26 @@ Porting of [Should.js](https://github.com/visionmedia/should.js)  to ActionScrip
 * Adaptation of API was also necessary - because ActionScript does not allow augment prototype of Object with a property getter
   (use o.should() instead)
 
-
 Not exact porting because of the platform differences, and I still have some methods to catch up with the original should.js (like the HTTP testing methods) but close enough. The main difference is that instead
 
-var o:Object = 
-    { name : "Radagast"
-    , color: "Brown"
-    }
-o.should.have.properties("name","color")
-    .and.have.property("name","Radagast");
-o.name.should.not.equal("Palandoo");
-o.color.should.equal("Brown");
-you have to go
+
+How to use?
+===========
+
+Just go like this
 
 ```
+
+var o:Object = 
+  { name: "Radagast"
+  , color: "Brown"
+  , age  : 642
+  }
+
 o.should().have.properties("name","color")
        and.have.property("name","Radagast");
 o.name.should().not.equal("Palandoo");
+o.age.should().be.aproximately(640,5); //640 +/- 5 
 o.color.should().equal("Brown");
 ```
 
