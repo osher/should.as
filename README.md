@@ -16,7 +16,6 @@ How to use?
 Just go like this
 
 ```
-
 var o:Object = 
   { name: "Radagast"
   , color: "Brown"
@@ -37,8 +36,10 @@ Now if you get stuck and need help from the intellisense, you have to do this:
 ```
 var should:tdd.Should = o.color.should();
 should. <ctrl+space>
-which kind'a takes the sting out, but for a peek in the intelisense - it helps
 ```
+
+which kind'a takes the sting out, but for a peek in the intelisense - it helps
+
 
 Important
 ---------
