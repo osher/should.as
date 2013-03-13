@@ -3,31 +3,43 @@ should.as
 
 Porting of [Should.js](https://github.com/visionmedia/should.js)  to ActionScript 3
 
-* Some implementatio details are different
-* Adaptation of API was also necessary - because ActionScript does not allow augment prototype of Object with a property getter
-  (use o.should() instead)
+* Some implementation details are different
+* Adaptation of API was also necessary - because ActionScript does not allow augment 
+  prototype of Object with a property getter
+  (use o.should()... instead of o.should....)
 
-Not exact porting because of the platform differences, and I still have some methods to catch up with the original should.js (like the HTTP testing methods) but close enough. The main difference is that instead
+Not exact porting because of the platform differences, 
+and I still have some methods to catch up with the original [should.js](https://github.com/visionmedia/should.js)
+(like the HTTP testing methods) but close enough. 
 
 
 How to use?
 ===========
 
-Just go like this
+Suppose you want to test a method such as
+```
+public function getCurrentUser(){ 
+    return { 
+      name: "Radagast"
+    , color: "Brown"
+    , age  : 642
+    }
+}
 
 ```
-var o:Object = 
-  { name: "Radagast"
-  , color: "Brown"
-  , age  : 642
-  }
+So, in your test function - just go like this
+
+
+```
+var o:Object = getCurrentUser();
 
 o.should().have.properties("name","color")
        and.have.property("name","Radagast");
 o.name.should().not.equal("Palandoo");
-o.age.should().be.aproximately(640,5); //640 +/- 5 
+o.age.should().be.aproximately(640,5); //i.e 640 +/- 5 
 o.color.should().equal("Brown");
 ```
+
 
 (the brackets - no getter possible - so the should attribute is a method, and you have to invoke it yourself)
 
