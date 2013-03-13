@@ -91,7 +91,7 @@ return us the method handler, and we still have to invoke it).
 ```
 u.name["should"]().equal("Radagast");
 u.color["should"]().equal("Brown");
-u.age["should"]().equal(758);
+u.age["should"]().equal(642);
 u.friends[0].name["should"]().equal("Gandalf");
 ```
 None of them are half as elegant as the 
