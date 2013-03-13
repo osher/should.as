@@ -94,7 +94,9 @@ u.color["should"]().equal("Brown");
 u.age["should"]().equal(758);
 u.friends[0].name["should"]().equal("Gandalf");
 ```
-All of them are ugly, but better then nothing.
+None of them are half as elegant as the 
+[original JavaScript library I'm porting from](https://github.com/visionmedia/should.js), 
+but better than nothing.
 My favorite is the last, which I take as least-worst, because I usually test deep 
 data-structrues, and if I want to leverage the performence of strong-typing, the whole
 structure is strong-typed, and thus, validated by the compiler...
@@ -105,7 +107,7 @@ Important
 ---------
 
 One more thing - you have to force the static constructor of Should as soon in
-execution as you can, for example, I do it here:
+execution as you can, for example, when using `flexunit` - I do it here:
 
 ```
 [Suite]
@@ -127,6 +129,9 @@ The static constructor adds a non-enumerable property to the prototype of object
 The property is a handler referenece (effectively a method) that when you invoke it
 it returns an instance of a `tdd.Should` object that implements all it takes to keep
 the language close enough to english.
+
+Since this static constructor is called as part of the test-framework - it only happen 
+in run-time on test runners. Your production code stays clean.
 
 
 I'll probably add some propper README.md later, and more awsome member functions to tdd.Should
