@@ -180,12 +180,14 @@ package should.tests
 		}
 		
 		[Test]
-		public function test_throws():void{
-			/*
+		public function test_throws_noArgsInvolved():void{
+			
 			var f:* = function():void{ throw new ArgumentError("haha") };
+			
 			f.should().raise("haha");
 			f.should().raise(ArgumentError);
 			f.should().raise(/ha/);
+			f.should().raise();
 			
 			fails( "f.should().raise(AssertionError)"
 				, function():void{ f.should().raise(AssertionError) }
@@ -196,8 +198,63 @@ package should.tests
 
 			fails( "f.should().raise(/ho/')"
 				, function():void{ f.should().raise(/ho/) }
-			)*/
+			)
 		}
+		
+		[Test] 
+		public function test_throws_withArgs():void{
+			var f:* = function(a:int,b:int):void{ throw new ArgumentError(a + " is not " + b) };
+			
+			f.should().raise(ArgumentError, [5,6]);
+			f.should().raise("5 is not 6", [5,6]);
+			f.should().raise(/is not/, [5,6]);
+			f.should().raise();
+			
+			fails( "f.should().raise(AssertionError, [5,6])"
+				, function():void{ f.should().raise(AssertionError, [5,6]) }
+			)
+			fails( "f.should().raise('hoho')"
+				, function():void{ f.should().raise('hoho', [5,6]) }
+			)
+			
+			fails( "f.should().raise(/ho/')"
+				, function():void{ f.should().raise(/ho/, [5,6]) }
+			)
+			
+			
+		}
+		
+		[Test] 
+		public function test_throws_withArgs_and_ctx():void{
+			var f:* = function(a:int,b:int):void{ throw new ArgumentError(this.name + " sais " + a + " is not " + b) }
+			  , o:Object = 
+				  { name: "tester" 
+				  }
+		     ;
+			
+			f.should().raise(ArgumentError, [5,6],o);
+			f.should().raise("tester sais 5 is not 6", [5,6],o);
+			f.should().raise(/tester sais/, [5,6],o);
+			f.should().raise(null,null,o);
+			f.should().raise(null,[],o);
+			f.should().raise(function(err:*):void{
+				Should.exist(err);
+			});
+			
+			fails( "f.should().raise(AssertionError, [5,6])"
+				, function():void{ f.should().raise(AssertionError, [5,6], o) }
+			)
+			fails( "f.should().raise('hoho')"
+				, function():void{ f.should().raise('hoho', [5,6], o) }
+			)
+			
+			fails( "f.should().raise(/ho/')"
+				, function():void{ f.should().raise(/ho/, [5,6], o) }
+			)
+			
+			
+		}
+		
 	
 	}
 }

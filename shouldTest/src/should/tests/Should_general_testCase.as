@@ -1,7 +1,6 @@
 package should.tests
 {
 	import org.flexunit.asserts.assertTrue;
-	
 	import tdd.Should;
 
 	public class Should_general_testCase

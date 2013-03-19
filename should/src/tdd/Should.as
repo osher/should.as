@@ -6,6 +6,7 @@ package tdd
 		
 		private var _value:*;
 		private var _negate:Boolean = false;
+		private var _err:*;
 
 		//static constructur
 		{
@@ -379,8 +380,8 @@ package tdd
 		//TODO - includeEql
 		
 		//TODO - keys
-		/*
-		public function throws(err:*):Should{
+		
+		public function throws(err:* = "",args:Array = null,ctx:Object = null):Should{
 			this.handler;
 			var f:Function = _value as Function
 			  , e:Error
@@ -389,15 +390,15 @@ package tdd
 			  ;
 			
 			try {
-				f();
+				f.apply(ctx, args || []);
 				ok = false;
 			}catch(ex:Error){
-				e = ex;
+				_err = e = ex;
 			}
 			
-			if (ok){
+			if (ok && err){
 				if (err is String) {
-					ok = err = e.message;
+					ok = err == e.message;
 					if (!ok) errInfo = s(" with a the message '" , err , "', but got '" , e.message , "'");
 				} else if (err is RegExp) {
 					ok = (err as RegExp).test(e.message);
@@ -405,6 +406,8 @@ package tdd
 				} else if (err is Class) {
 					ok = e is err;
 					if (!ok) errInfo = s(" of type '" , err , "', but got '" , e.name , "'");
+				} else if (err is Function) {
+					err(_err);
 				}
 			}
 			
@@ -416,7 +419,7 @@ package tdd
 				  : function():String { return s("expected no error to be thrown, got " , errInfo ) }
 			);
 			return this;
-		}*/
+		}
 		
 		//--- member alliases ----------------------------------------------------------
 		//----- handler
@@ -453,12 +456,11 @@ package tdd
 		//----- properties
 		public function ownProps(...args):Should{ return ownProperties.apply(this, args) }
 		//----- throws
-	/*	public function raise(err:*):Should{ return throws(err) }
-		public function raises(err:*):Should{ return throws(err) }
-		public function throwErr(err:*):Should{ return throws(err) }
-		public function throwError(err:*):Should{ return throws(err) }
-		public function $throw(err:*):Should{ return throws(err) }
-    */
+	 	public function raise(err:* = "", args:Array = null, ctx:Object = null):Should{ return throws(err,args,ctx) }
+		public function raises(err:* = "", args:Array = null, ctx:Object = null):Should{ return throws(err,args,ctx) }
+		public function throwErr(err:* = "", args:Array = null, ctx:Object = null):Should{ return throws(err,args,ctx) }
+		public function throwError(err:* = "", args:Array = null, ctx:Object = null):Should{ return throws(err,args,ctx) }
+		public function $throw(err:* = "", args:Array = null, ctx:Object = null):Should{ return throws(err,args,ctx) }
 		
 		//--- internals ----------------------------------------------------------------
 
